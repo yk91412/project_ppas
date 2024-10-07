@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>인공지능 관련 특허/논문 동향 분석</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        console.log('Plot image URL:', "{{ url_for('static', filename=plot_image.split('static/')[1]) }}");  // 디버깅 메시지 추가
+    </script>
+</head>
+<body style="background-color: white;">
+    <h1 class="center" style="text-align: center;">인공지능 관련 특허/논문 동향 분석</h1>
+    <div id="plot-container">
+        <img src="{{ url_for('static', filename=plot_image.split('static/')[1]) }}" alt="Patent Counts by Year">
+    </div>
+</body>
+</html>

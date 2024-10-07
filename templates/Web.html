@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>Patent Search</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <script>
+            console.log('HTML loaded');  // 디버깅 로그 추가
+        </script>
+        <script src="{{url_for('static', filename='js/scripts.js')}}" defer></script>
+    </head>
+    <body>
+        <header class="header-container">
+            <div class="header-top">
+            <h4>인공지능 특허 알아보기</h4>
+                <img src="{{ url_for('static', filename='image/search.png') }}" class="header-img" width="30" height="30">
+            </div>
+            <img src="{{ url_for('static', filename='image/ai.png') }}" class="header-image" width="50" height="50">
+            <h1 class="center">PPAS</h1>
+            <h4 class="subTitle">Paper Patent Ai Search</h4>
+        </header>
+        <div id="loading">
+            <div class="spinner"></div>
+            <div class="state-viewer-container">
+                <label class="label-font" id="stateLabel">조회 중...</label>
+            </div>
+        </div>
+        <form id="search-form" method="post" action="/search">
+            {{ form.hidden_tag() }}
+            <div class="main-container">
+                <div id="div_filter">
+                    <div class="filter-group">
+                        <div class="row">
+                            <label for="filter_type">필터:</label>
+                            <select name="filter_type" id="filter_type">
+                                <option value="patent" {% if filter_type == 'patent' %}selected{% endif %}>특허실용신안</option>
+                                <option value="applicant" {% if filter_type == 'applicant' %}selected{% endif %}>출원인</option>
+                            </select>
+                            <label for="search_keyword">검색어:</label>
+                            <input type="text" name="search_keyword" id="search_keyword" value="{{ search_keyword }}">
+                        </div>
+                        <div class="row">
+                            <label for="start_date">출원일자:</label>
+                            <input type="date" name="start_date" id="start_date" value="{{ start_date or '2013-01-01' }}">
+                            <label for="end_date">~</label>
+                            <input type="date" name="end_date" id="end_date" value="{{ end_date or date.today().strftime('%Y-%m-%d') }}">
+                        </div>
+                    </div>
+                    <button type="submit" class="search-button">검색</button>
+                    <button type="button" class="download-button" onclick="downloadClick()">
+                        <img src="{{ url_for('static', filename='image/download.png') }}" alt="Download Icon" width="25" height="25">
+                        <span class="tooltip">다운로드</span>
+                    </button>
+                    <button type="button" class="plot-button" id="plot-button">
+                        <img src="{{ url_for('static', filename='image/chart-bar.png') }}" alt="Plot Icon" width="25" height="25">
+                        <span class="tooltip">그래프</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="div_container" class="main-content">
+                <div id="div_fields">
+                    <label class="fields-label">카테고리</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-column">
+                                <input type="checkbox" id="general" name="application_fields" value="제너럴" {% if '제너럴' in application_fields %}checked{% endif %}>
+                                <label for="general">
+                                    <div class="checkbox-image" id="general-image"></div>
+                                    제너럴
+                                </label><br>
+                                <input type="checkbox" id="ecommerce" name="application_fields" value="전자상거래서비스" {% if '전자상거래' in application_fields %}checked{% endif %}>
+                                <label for="ecommerce">
+                                    <div class="checkbox-image" id="ecommerce-image"></div>
+                                    전자상거래
+                                </label><br>
+                                <input type="checkbox" id="finance" name="application_fields" value="금융" {% if '금융' in application_fields %}checked{% endif %}>
+                                <label for="finance">
+                                    <div class="checkbox-image" id="finance-image"></div>
+                                    금융
+                                </label><br>
+                                <input type="checkbox" id="agriculture" name="application_fields" value="농업" {% if '농업' in application_fields %}checked{% endif %}>
+                                <label for="agriculture">
+                                    <div class="checkbox-image" id="agriculture-image"></div>
+                                    농업
+                                </label><br>
+                                <input type="checkbox" id="security" name="application_fields" value="보안" {% if '보안' in application_fields %}checked{% endif %}>
+                                <label for="security">
+                                    <div class="checkbox-image" id="security-image"></div>
+                                    보안
+                                </label><br>
+                        </div>
+                        <div class="checkbox-column">
+                                <input type="checkbox" id="semiconductor" name="application_fields" value="반도체" {% if '반도체' in application_fields %}checked{% endif %}>
+                                <label for="semiconductor">
+                                    <div class="checkbox-image" id="semiconductor-image"></div>
+                                    반도체
+                                </label><br>
+                                <input type="checkbox" id="medical" name="application_fields" value="의료" {% if '의료' in application_fields %}checked{% endif %}>
+                                <label for="medical">
+                                    <div class="checkbox-image" id="medical-image"></div>
+                                    의료
+                                </label><br>
+                                <input type="checkbox" id="automobile" name="application_fields" value="자동차" {% if '자동차' in application_fields %}checked{% endif %}>
+                                <label for="automobile">
+                                    <div class="checkbox-image" id="automobile-image"></div>
+                                    자동차
+                                </label><br>
+                                <input type="checkbox" id="education" name="application_fields" value="교육" {% if '교육' in application_fields %}checked{% endif %}>
+                                <label for="education">
+                                    <div class="checkbox-image" id="education-image"></div>
+                                    교육
+                                </label><br>
+                                <input type="checkbox" id="entertainment" name="application_fields" value="엔터테인먼트" {% if '엔터테인먼트' in application_fields %}checked{% endif %}>
+                                <label for="entertainment">
+                                    <div class="checkbox-image" id="entertainment-image"></div>
+                                    엔터테인먼트
+                                </label><br>
+                                <input type="checkbox" id="automation" name="application_fields" value="자동화시스템" {% if '자동화시스템' in application_fields %}checked{% endif %}>
+                                <label for="automation">
+                                    <div class="checkbox-image" id="automation-image"></div>
+                                    자동화시스템</label><br>
+                        </div>
+                    </div>
+                    
+                    <div class="top-tables">
+                        {% if top3_table or top5_table %}
+                        <div>
+                            <h2>전체 출원인 중 Top 3</h2>
+                            <div class="table-container">
+                                {{ top3_table | safe }}
+                            </div>
+                            <h2>벤처, 스타트업 중 Top 10</h2>
+                            <div class="table-container">
+                                {{ top5_table | safe }}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            
+            
+                <div class="tables">
+                    {% if table %}
+                    <div id="div_table_container">
+                        <input type="hidden" id="patents_length" value="{{patents_length}}"/>
+                        <h2 id="patents_h">특허 결과</h2>
+                        <div id="table-container" class="scrollable-table">
+                            {{ table | safe }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="div_table_container">
+                        <h2>No Search Results</h2>
+                        <div id="table-container" class="scrollable-table"></div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if paper_table %}
+                    <div id="div_paper_table_container">
+                        <input type="hidden" id="papapers_length" value="{{papers_length}}"/>
+                        <h2  id="papapers_h">논문 결과</h2>
+                        <div id="paper-table-container" class="scrollable-table">
+                            {{ paper_table | safe }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div id="div_paper_table_container">
+                        <h2>No Paper Results</h2>
+                        <div id="paper-table-container" class="scrollable-table"></div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+        <footer>
+            <p>My AI List &copy; 4조</p>
+        </footer>
+    </body>
+</html>
