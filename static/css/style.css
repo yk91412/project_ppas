@@ -1,0 +1,491 @@
+body {
+    font-family: SEBANG_Gothic, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Noto Sans KR", "Malgun Gothic", 'Nanum Gothic', Dotum, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #9abee7;
+    padding: 20px;
+    text-align: center;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative; /* 중앙 정렬을 위해 relative 설정 */
+    border-bottom: 1px solid rgb(101, 102, 109);
+}
+
+.header-top .header-img {
+    position: relative;
+    right: 0;
+    margin-left: 10px;
+}
+
+header h1 {
+    cursor: pointer;
+    margin: 0;
+    margin-top: 20px;
+    display: inline-block;
+    vertical-align: center;
+    text-align: center;
+    align-items: center;
+}
+
+header h4 {
+    
+    text-align: center;
+    margin: 0;
+    align-items: center;
+    padding: 10px 0;
+    margin-left: 10px; /* img와 간격 조정을 위해 여백 추가 */
+}
+
+.header-image {
+    margin-top: 20px; /* h1과 일치하도록 이미지 위치 조정 */
+}
+
+
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* 자식 요소들을 양 끝으로 배치 */
+}
+
+#div_filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    width: 100%; /* 가로 너비를 설정하여 중앙 정렬이 더 명확하게 보이도록 설정 */
+    max-width: 600px; /* 최대 너비 설정 */
+}
+
+#div_fields {
+    width: 25%;
+    padding-right: 1rem;
+    /* margin-right: 1rem; */
+    margin-left: 30px;
+}
+
+.fields-label {
+    font-size: 1rem;
+    padding: 20px;/* h2와 체크박스 그룹 사이의 간격 추가 */
+    font-weight: bold;
+}
+
+.checkbox-group {
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding-bottom: 0px;
+}
+
+.checkbox-group label {
+    width: 45%;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-column {
+    min-width: 100px;
+
+}
+
+.checkbox-group label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.row {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.row label {
+    flex: 1;
+    min-width: 100px;
+}
+
+
+.search-button:hover {
+    background-color: #aaa8a8c4;
+}
+
+
+.search-button{
+    padding: 10px 20px;
+    background-color: #d57c7c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex: 1;
+    margin: 7px; 
+}
+
+
+.filter-group input[type="date"],
+.filter-group select,
+.filter-group input[type="text"] {
+    flex: 2;
+    min-width: 80px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 70%;
+}
+
+
+#div_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+
+.top-tables {
+    display: block;
+    padding: 20px;
+    margin: 0 auto;
+    /* width: 100%; */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 크기를 계산 */
+    padding-top: 0px;
+}
+
+.top-tables h2 {
+    font-size: 1em;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    max-width: 100%;
+    /* 최대 너비를 설정하여 텍스트가 잘리지 않도록 함 */
+}
+
+.tables {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#div_table_container,
+#div_paper_table_container {
+    width: 100%;
+}
+
+.scrollable-table {
+    overflow-y: auto;
+    max-height: 300px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.scrollable-table thead th {
+    position: sticky;
+    top: 0;
+    background: #f1f1f1;
+    z-index: 1;
+    padding: 5px;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+table th,
+table td {
+    font-size: 0.8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+}
+
+table th {
+    font-weight: bold;
+    text-align: center;
+}
+
+table td:nth-child(1) {
+    width: calc(1.5 * 200px); /* 이전 너비의 1.5배 */
+}
+
+table td:nth-child(6) {
+    max-width: 200px;
+}
+
+h2 {
+    font-size: 1em;
+}
+
+.label {
+    font-size: 1.3em;
+}
+
+.content {
+    font-size: 1.1em;
+}
+
+footer {
+    background-color: #9abee7;
+    color: #070707;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    bottom: 0;
+    left: 0;
+}
+    
+table{
+    width: 100%;
+    table-layout: fixed;
+}
+
+#table-container table th:nth-child(1){
+    width: 10%;
+}
+
+#table-container table th:nth-child(2){
+    width: 10%;
+}
+
+#table-container table th:nth-child(3){
+    width: 20%;
+}
+
+#table-container table th:nth-child(4){
+    width: 50%;
+}
+
+#table-container table th:nth-child(5){
+    width: 10%;
+    
+    
+}
+
+
+input[type="checkbox"] {
+    display: none;
+}
+
+
+.checkbox-image {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-image: url('/static/image/check_off.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+input[type="checkbox"]:checked + label .checkbox-image {
+    background-image: url('/static/image/check_on.png');
+}
+
+
+
+/* 테이블의 겉 테두리 설정 */
+.table-container table,
+.scrollable-table table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* 모든 셀의 테두리 초기화 */
+.table-container th,
+.table-container td,
+.scrollable-table th,
+.scrollable-table td {
+    border: none; 
+    padding: 4px;
+    text-align: left; 
+    border: 1px solid #ddd;
+    line-height: 1.5;
+}
+
+/* 테이블 헤더 셀의 배경색과 글자 색 설정 */
+.table-container th,
+.scrollable-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: center;
+    padding: 8px;
+    line-height: 1.7;
+}
+
+.table-container th:nth-child(2),
+.scrollable-table th:nth-child(2){
+    text-align: center;
+}
+
+
+/* 테이블의 첫 번째 행 셀의 상단 테두리 설정 */
+.table-container tr:first-child th,
+.scrollable-table tr:first-child th,
+.table-container tr:first-child td,
+.scrollable-table tr:first-child td {
+    border-top: 1px solid black;
+}
+
+/* 테이블의 마지막 행 셀의 하단 테두리 설정 */
+.table-container tr:last-child td,
+.scrollable-table tr:last-child td {
+    border-bottom: 1px solid black !important; 
+}
+
+/* 테이블의 첫 번째 열 셀의 왼쪽 테두리 설정 */
+.table-container td:first-child,
+.scrollable-table td:first-child,
+.table-container th:first-child,
+.scrollable-table th:first-child {
+    border-left: 1px solid black; 
+}
+
+/* 테이블의 마지막 열 셀의 오른쪽 테두리 설정 */
+.table-container td:last-child,
+.scrollable-table td:last-child,
+.table-container th:last-child,
+.scrollable-table th:last-child {
+    border-right: 1px solid black; 
+}
+
+.table-container{
+    width:300px;
+}
+
+
+.table-container th:last-child,
+.table-container td:last-child {
+    width: 30%;
+}
+
+#paper-table-container {
+    width:100%;
+}
+
+
+#paper-table-container th:last-child,
+#paper-table-container td:last-child{
+    width: 7%;
+}
+
+
+.download-button,
+.plot-button {
+    background-color: transparent; 
+    border: none; 
+    padding: 0; 
+    margin: 5px; 
+    cursor: pointer; 
+    position: relative; 
+    display: inline-block; 
+}
+
+
+.download-button img,
+.plot-button img {
+    vertical-align: middle; 
+}
+
+.download-button .tooltip,
+.plot-button .tooltip {
+    visibility: hidden;
+    background-color: black; 
+    color: white; 
+    text-align: center; 
+    border-radius: 6px; 
+    padding: 5px 10px; 
+    position: absolute;
+    z-index: 1; 
+    bottom: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    writing-mode: horizontal-tb; 
+}
+
+.download-button:hover .tooltip,
+.plot-button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* loading */
+#loading {
+    display: none;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+  
+.state-viewer-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 150%);
+}
+  
+.spinner {
+    position: relative;
+    top: 50%;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #03114E;
+    animation: spin 0.6s infinite linear;
+}
+  
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+  
+/* + FONT (필요에 맞게 수정하여 사용) */
+.label-font {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 소제목 */
+.subTitle {
+    margin: 0;
+}
