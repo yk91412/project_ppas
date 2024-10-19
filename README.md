@@ -15,9 +15,9 @@ AI  기술의 발전은 우리 사회에 많은 변화를 가져오고 있습니
 
     • 프론트엔드: HTML, CSS, JavaScript
     
-    •	백엔드: Flask
+    • 백엔드: Flask
     
-    •	주요 라이브러리: pandas, matplotlib, zipfile, okt
+    • 주요 라이브러리: pandas, matplotlib, zipfile, okt
 
 
 
@@ -43,7 +43,9 @@ AI  기술의 발전은 우리 사회에 많은 변화를 가져오고 있습니
 ## **기술적 기여 및 개인적인 성취**
 
      - 웹 개발 : UI/UX를 구현하면서 프로젝트 최적화 경험
+    
      - 백엔드 개발 : flask 활용 및 pandas로 원하는 결과 필터링
+     
      - 데이터 전처리 및 분석 : okt를 활용하여 데이터 전처리 하는 방법 터득, 분석을 통한 인사이트 도출 경험
 
 
